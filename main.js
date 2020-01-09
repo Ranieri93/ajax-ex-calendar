@@ -10,35 +10,38 @@ $(document).ready(function() {
     // console.log(startingMoment.format('YYYY MM DD'));
 
 
-    // console.log(startingMoment.month());
+    console.log(startingMoment.year());
 
     writeDays(startingMoment)
     callApiHolidays(startingMoment)
 
+
+
     // vado ad aggiungere un mese attraverso il click:
     $('#nextMonth').click(function() {
 
-        // uso la funzione add di moment per aggiungere un mese
-        startingMoment.add(1,'M');
-        // console.log(startingMoment.format('YYYY MM DD'));
-        writeDays(startingMoment)
-
-
-        callApiHolidays(startingMoment)
-
-
+        if ($('ul li:first-child').attr('data-day') != '2018-12-01') {
+            console.log($('ul li:first-child').attr('data-day'));
+            // uso la funzione add di moment per aggiungere un mese
+            startingMoment.add(1,'M');
+            console.log(startingMoment.year());
+            // console.log(startingMoment.format('YYYY MM DD'));
+            writeDays(startingMoment)
+            callApiHolidays(startingMoment)
+        }
     });
 
     $('#prevMonth').click(function() {
 
-        // uso la funzione add di moment per aggiungere un mese
-        startingMoment.subtract(1,'M');
-        // console.log(startingMoment.format('YYYY MM DD'));
-        writeDays(startingMoment)
-
-
-        callApiHolidays(startingMoment)
-
+        if ($('ul li:first-child').attr('data-day') != '2018-01-01') {
+            console.log($('ul li:first-child').attr('data-day'));
+            // uso la funzione add di moment per aggiungere un mese
+            startingMoment.subtract(1,'M');
+            console.log(startingMoment.year());
+            // console.log(startingMoment.format('YYYY MM DD'));
+            writeDays(startingMoment)
+            callApiHolidays(startingMoment)
+        }
     });
 
     function writeDays (moment) {
@@ -90,16 +93,11 @@ $(document).ready(function() {
                 // ci sono solo due parametri, che saranno:
                 for (var i = 0; i < responseAPI.length; i++) {
                     var currentResponse = responseAPI[i];
-                    console.log(currentResponse);
                     var responseDate = currentResponse.date;
                     var responseName = currentResponse.name;
-                    
                     // tramite i selettori avanzati mi vado a cercare direttamente la corrispondenza tra le date:
-
                     $('#calendar [data-day="' + responseDate + '"]').addClass('holiday').append(' ' + responseName)
                 }
-
-
             },
             'error': function () {
                 alert('error')
