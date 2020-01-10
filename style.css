@@ -28,8 +28,30 @@ main {
 	margin-top: 20px;
 	display: flex;
 	justify-content: center;
+	align-items: center;
+	height: calc(100vh - 150px)
 }
+
+ul {
+	max-width: 700px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+li {
+	height: 100px;
+	width: 100px;
+	border: 1px solid black;
+	list-style-type: none;
+	padding: 10px;
+}
+
 
 .holiday {
 	color: red;
+}
+
+.disabled {
+	background-color: lightgrey;
+	cursor: not-allowed;
 }
